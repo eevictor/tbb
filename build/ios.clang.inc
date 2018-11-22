@@ -20,4 +20,5 @@ include $(tbb_root)/build/macos.clang.inc
 
 CPLUS_FLAGS += -miphoneos-version-min=8.0
 LINK_FLAGS += -miphoneos-version-min=8.0
-LIB_LINK_FLAGS += -miphoneos-version-min=8.0
+# for building ios library in 10.1
+#LIB_LINK_FLAGS += -miphoneos-version-min=8.0
