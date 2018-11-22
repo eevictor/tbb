@@ -53,7 +53,7 @@ endif
 
 ifneq (,$(stdlib))
     CPLUS_FLAGS    += -stdlib=$(stdlib)
-    LIB_LINK_FLAGS += -stdlib=$(stdlib)
+    #LIB_LINK_FLAGS += -stdlib=$(stdlib)
 endif
 
 ifeq (intel64,$(arch))
@@ -85,7 +85,16 @@ endif
 ifeq ($(arch),$(filter $(arch),armv7 armv7s arm64))
     CPLUS_FLAGS += -arch $(arch)
     LINK_FLAGS += -arch $(arch)
-    LIB_LINK_FLAGS += -arch $(arch)
+    #LIB_LINK_FLAGS += -arch $(arch)
+#---- the following 8 lines are added for target iOS
+    LIB_LINK_FLAGS := $(filter-out -dynamiclib,$(LIB_LINK_FLAGS)) -static -arch_only $(arch)
+    LIB_LINK_CMD := libtool
+    DLL := a
+    EXPORT_KEY :=
+    LIBDL :=
+    LIBS :=
+    MALLOC.DEF :=
+    TBB.DEF :=    
 endif
 
 ifdef SDKROOT
